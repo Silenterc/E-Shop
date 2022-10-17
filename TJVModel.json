@@ -1,0 +1,207 @@
+{
+  "entities": [
+    {
+      "name": "Objednavka",
+      "parent": null,
+      "attr": [
+        {
+          "name": "id",
+          "primary": true,
+          "unique": false,
+          "nullable": false
+        },
+        {
+          "name": "datum",
+          "primary": false,
+          "unique": false,
+          "nullable": false
+        },
+        {
+          "name": "cas",
+          "primary": false,
+          "unique": false,
+          "nullable": false
+        },
+        {
+          "name": "stav",
+          "primary": false,
+          "unique": false,
+          "nullable": false
+        }
+      ],
+      "transform": {
+        "x": 787,
+        "y": 169.20001220703125,
+        "width": 152,
+        "height": 194
+      }
+    },
+    {
+      "name": "Produkt",
+      "parent": null,
+      "attr": [
+        {
+          "name": "id",
+          "primary": true,
+          "unique": false,
+          "nullable": false
+        },
+        {
+          "name": "nazev",
+          "primary": false,
+          "unique": false,
+          "nullable": false
+        },
+        {
+          "name": "cena",
+          "primary": false,
+          "unique": false,
+          "nullable": false
+        },
+        {
+          "name": "mnozstvi",
+          "primary": false,
+          "unique": false,
+          "nullable": false
+        }
+      ],
+      "transform": {
+        "x": 1048.818181818182,
+        "y": 182.60000610351562,
+        "width": 263,
+        "height": 175
+      }
+    },
+    {
+      "name": "Zakaznik",
+      "parent": null,
+      "attr": [
+        {
+          "name": "id",
+          "primary": true,
+          "unique": false,
+          "nullable": false
+        },
+        {
+          "name": "jmeno",
+          "primary": false,
+          "unique": false,
+          "nullable": false
+        },
+        {
+          "name": "e-mail",
+          "primary": false,
+          "unique": false,
+          "nullable": false
+        },
+        {
+          "name": "adresa",
+          "primary": false,
+          "unique": false,
+          "nullable": false
+        }
+      ],
+      "transform": {
+        "x": 465,
+        "y": 181.60000610351562,
+        "width": 206,
+        "height": 177
+      }
+    }
+  ],
+  "relations": [
+    [
+      {
+        "entity": "Objednavka",
+        "identifying": false,
+        "optional": false,
+        "cardinality": 0,
+        "xor": null,
+        "name": null,
+        "transform": {
+          "anchor": {
+            "x": 787,
+            "y": 266.20001220703125,
+            "edge": 3
+          },
+          "points": [
+            {
+              "x": 729,
+              "y": 268.15000915527344
+            }
+          ],
+          "manual": false
+        }
+      },
+      {
+        "entity": "Zakaznik",
+        "identifying": false,
+        "optional": true,
+        "cardinality": 1,
+        "xor": null,
+        "name": null,
+        "transform": {
+          "anchor": {
+            "x": 671,
+            "y": 270.1000061035156,
+            "edge": 1
+          },
+          "points": [
+            {
+              "x": 729,
+              "y": 268.15000915527344
+            }
+          ],
+          "manual": false
+        }
+      }
+    ],
+    [
+      {
+        "entity": "Objednavka",
+        "identifying": false,
+        "optional": false,
+        "cardinality": 0,
+        "xor": null,
+        "name": null,
+        "transform": {
+          "anchor": {
+            "x": 939,
+            "y": 266.20001220703125,
+            "edge": 1
+          },
+          "points": [
+            {
+              "x": 993.909090909091,
+              "y": 268.15000915527344
+            }
+          ],
+          "manual": false
+        }
+      },
+      {
+        "entity": "Produkt",
+        "identifying": false,
+        "optional": true,
+        "cardinality": 0,
+        "xor": null,
+        "name": null,
+        "transform": {
+          "anchor": {
+            "x": 1048.818181818182,
+            "y": 270.1000061035156,
+            "edge": 3
+          },
+          "points": [
+            {
+              "x": 993.909090909091,
+              "y": 268.15000915527344
+            }
+          ],
+          "manual": false
+        }
+      }
+    ]
+  ],
+  "notes": []
+}
