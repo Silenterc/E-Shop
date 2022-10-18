@@ -99,6 +99,12 @@
           "primary": false,
           "unique": false,
           "nullable": false
+        },
+        {
+          "name": "penize",
+          "primary": false,
+          "unique": false,
+          "nullable": false
         }
       ],
       "transform": {
@@ -112,51 +118,27 @@
   "relations": [
     [
       {
-        "entity": "Objednavka",
+        "entity": "Produkt",
         "identifying": false,
-        "optional": false,
+        "optional": true,
         "cardinality": 0,
         "xor": null,
         "name": null,
         "transform": {
           "anchor": {
-            "x": 787,
-            "y": 266.20001220703125,
+            "x": 1048.818181818182,
+            "y": 270.1000061035156,
             "edge": 3
           },
           "points": [
             {
-              "x": 729,
+              "x": 993.909090909091,
               "y": 268.15000915527344
             }
           ],
           "manual": false
         }
       },
-      {
-        "entity": "Zakaznik",
-        "identifying": false,
-        "optional": true,
-        "cardinality": 1,
-        "xor": null,
-        "name": null,
-        "transform": {
-          "anchor": {
-            "x": 671,
-            "y": 270.1000061035156,
-            "edge": 1
-          },
-          "points": [
-            {
-              "x": 729,
-              "y": 268.15000915527344
-            }
-          ],
-          "manual": false
-        }
-      }
-    ],
-    [
       {
         "entity": "Objednavka",
         "identifying": false,
@@ -178,23 +160,47 @@
           ],
           "manual": false
         }
-      },
+      }
+    ],
+    [
       {
-        "entity": "Produkt",
+        "entity": "Zakaznik",
         "identifying": false,
         "optional": true,
+        "cardinality": 1,
+        "xor": null,
+        "name": null,
+        "transform": {
+          "anchor": {
+            "x": 671,
+            "y": 270.1000061035156,
+            "edge": 1
+          },
+          "points": [
+            {
+              "x": 729,
+              "y": 268.15000915527344
+            }
+          ],
+          "manual": false
+        }
+      },
+      {
+        "entity": "Objednavka",
+        "identifying": false,
+        "optional": false,
         "cardinality": 0,
         "xor": null,
         "name": null,
         "transform": {
           "anchor": {
-            "x": 1048.818181818182,
-            "y": 270.1000061035156,
+            "x": 787,
+            "y": 266.20001220703125,
             "edge": 3
           },
           "points": [
             {
-              "x": 993.909090909091,
+              "x": 729,
               "y": 268.15000915527344
             }
           ],
