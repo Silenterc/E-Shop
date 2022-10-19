@@ -7,3 +7,5 @@ Když zákazník bude chtít provézt objednávku = klikne na "Koupit", ale nebu
 ## Komplexnější dotaz v serveru
 V profilu zákazníka uvidí např. 3 jeho nejnovější objednávky.
     -Nejsem si jistý co za lepší dotaz vymyslet.
+
+<img src="diagram.png">
