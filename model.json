@@ -11,12 +11,6 @@
           "nullable": false
         },
         {
-          "name": "datum",
-          "primary": false,
-          "unique": false,
-          "nullable": false
-        },
-        {
           "name": "cas",
           "primary": false,
           "unique": false,
