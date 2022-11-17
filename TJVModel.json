@@ -30,10 +30,34 @@
         }
       ],
       "transform": {
-        "x": 787,
-        "y": 169.20001220703125,
+        "x": 494,
+        "y": 192.20001220703125,
         "width": 152,
         "height": 194
+      }
+    },
+    {
+      "name": "Objednavka_produkt",
+      "parent": null,
+      "attr": [
+        {
+          "name": "id",
+          "primary": true,
+          "unique": false,
+          "nullable": false
+        },
+        {
+          "name": "mnozstvi",
+          "primary": false,
+          "unique": false,
+          "nullable": false
+        }
+      ],
+      "transform": {
+        "x": 762,
+        "y": 194.609375,
+        "width": 181,
+        "height": 149
       }
     },
     {
@@ -108,8 +132,8 @@
         }
       ],
       "transform": {
-        "x": 465,
-        "y": 181.60000610351562,
+        "x": 158,
+        "y": 197.60000610351562,
         "width": 206,
         "height": 177
       }
@@ -118,10 +142,56 @@
   "relations": [
     [
       {
+        "entity": "Objednavka_produkt",
+        "identifying": false,
+        "optional": false,
+        "cardinality": 0,
+        "xor": null,
+        "name": null,
+        "transform": {
+          "anchor": {
+            "x": 762,
+            "y": 269.109375,
+            "edge": 3
+          },
+          "points": [
+            {
+              "x": 704,
+              "y": 279.1546936035156
+            }
+          ],
+          "manual": false
+        }
+      },
+      {
+        "entity": "Objednavka",
+        "identifying": false,
+        "optional": false,
+        "cardinality": 1,
+        "xor": null,
+        "name": null,
+        "transform": {
+          "anchor": {
+            "x": 646,
+            "y": 289.20001220703125,
+            "edge": 1
+          },
+          "points": [
+            {
+              "x": 704,
+              "y": 279.1546936035156
+            }
+          ],
+          "manual": false
+        }
+      }
+    ],
+    [
+      {
         "entity": "Produkt",
         "identifying": false,
         "optional": true,
-        "cardinality": 0,
+        "cardinality": 1,
         "xor": null,
         "name": null,
         "transform": {
@@ -132,15 +202,15 @@
           },
           "points": [
             {
-              "x": 993.909090909091,
-              "y": 268.15000915527344
+              "x": 995.909090909091,
+              "y": 269.6046905517578
             }
           ],
           "manual": false
         }
       },
       {
-        "entity": "Objednavka",
+        "entity": "Objednavka_produkt",
         "identifying": false,
         "optional": false,
         "cardinality": 0,
@@ -148,14 +218,14 @@
         "name": null,
         "transform": {
           "anchor": {
-            "x": 939,
-            "y": 266.20001220703125,
+            "x": 943,
+            "y": 269.109375,
             "edge": 1
           },
           "points": [
             {
-              "x": 993.909090909091,
-              "y": 268.15000915527344
+              "x": 995.909090909091,
+              "y": 269.6046905517578
             }
           ],
           "manual": false
@@ -172,14 +242,14 @@
         "name": null,
         "transform": {
           "anchor": {
-            "x": 671,
-            "y": 270.1000061035156,
+            "x": 364,
+            "y": 286.1000061035156,
             "edge": 1
           },
           "points": [
             {
-              "x": 729,
-              "y": 268.15000915527344
+              "x": 429,
+              "y": 287.65000915527344
             }
           ],
           "manual": false
@@ -194,14 +264,14 @@
         "name": null,
         "transform": {
           "anchor": {
-            "x": 787,
-            "y": 266.20001220703125,
+            "x": 494,
+            "y": 289.20001220703125,
             "edge": 3
           },
           "points": [
             {
-              "x": 729,
-              "y": 268.15000915527344
+              "x": 429,
+              "y": 287.65000915527344
             }
           ],
           "manual": false
