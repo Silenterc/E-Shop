@@ -4,45 +4,44 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
-import java.util.Objects;
 
 @Entity
 @Data
-public class Order implements DomainEntity<Long>, Serializable {
+public class Product implements DomainEntity<Long>, Serializable {
     @Id
     @GeneratedValue
     private Long id;
-    private Timestamp time;
-    private String state;
-    @ManyToOne
-    private Customer buyer;
+    private String name;
+    private String price;
+    private String amount;
 
-    public Order(Long id, Timestamp time, String state, Customer buyer) {
+    public Product(){}
+
+    public Product(Long id, String name, String price, String amount) {
         this.id = id;
-        this.time = time;
-        this.state = state;
-        this.buyer = Objects.requireNonNull(buyer);
+        this.name = name;
+        this.price = price;
+        this.amount = amount;
     }
-    public Order(){}
     @Override
     public Long getId(){
         return id;
     }
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Order ord = (Order) o;
+        Product prod = (Product) o;
         if(getId() == null){
-            return ord.getId() == null;
+            return prod.getId() == null;
         }
-        return getId().equals(ord.getId());
+        return getId().equals(prod.getId());
     }
 
     @Override
     public int hashCode() {
         return getId() != null ? getId().hashCode() : 0;
     }
+
+
 }

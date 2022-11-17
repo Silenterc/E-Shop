@@ -2,43 +2,44 @@ package cz.cvut.fit.zimaluk1.tjv.tjveshop.domain;
 
 import lombok.Data;
 
+
 import javax.persistence.*;
-import java.io.Serializable;
-import java.sql.Timestamp;
+import java.io.*;
 import java.util.Objects;
 
 @Entity
 @Data
-public class Order implements DomainEntity<Long>, Serializable {
+public class Order_Product implements DomainEntity<Long>, Serializable {
     @Id
     @GeneratedValue
     private Long id;
-    private Timestamp time;
-    private String state;
     @ManyToOne
-    private Customer buyer;
+    private Order order;
+    @ManyToOne
+    private Product product;
+    private Long amount;
 
-    public Order(Long id, Timestamp time, String state, Customer buyer) {
+    public Order_Product(Long id, Order order, Product product, Long amount) {
         this.id = id;
-        this.time = time;
-        this.state = state;
-        this.buyer = Objects.requireNonNull(buyer);
+        this.order = Objects.requireNonNull(order);
+        this.product = Objects.requireNonNull(product);
+        this.amount = amount;
     }
-    public Order(){}
+    public Order_Product(){}
+
     @Override
     public Long getId(){
         return id;
     }
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Order ord = (Order) o;
+        Order_Product oprod = (Order_Product) o;
         if(getId() == null){
-            return ord.getId() == null;
+            return oprod.getId() == null;
         }
-        return getId().equals(ord.getId());
+        return getId().equals(oprod.getId());
     }
 
     @Override
