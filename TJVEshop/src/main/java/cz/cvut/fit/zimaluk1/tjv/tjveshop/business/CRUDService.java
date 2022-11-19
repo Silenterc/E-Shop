@@ -4,11 +4,12 @@ import cz.cvut.fit.zimaluk1.tjv.tjveshop.domain.DomainEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Optional;
 
-
+@Service
 public abstract class CRUDService<D extends DomainEntity<K>,K> {
     protected final JpaRepository<D, K> repository;
 
