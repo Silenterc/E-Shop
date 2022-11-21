@@ -32,6 +32,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     //implementation 'com.vaadin:vaadin-spring-boot-starter'
     implementation 'org.hibernate:hibernate-core:5.6.10.Final'
+    implementation 'org.modelmapper:modelmapper:2.1.1'
     implementation 'com.h2database:h2:2.1.214'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'

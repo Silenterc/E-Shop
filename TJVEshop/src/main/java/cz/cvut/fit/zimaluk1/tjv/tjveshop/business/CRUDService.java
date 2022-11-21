@@ -16,10 +16,7 @@ public abstract class CRUDService<D extends DomainEntity<K>,K> {
     protected CRUDService(JpaRepository<D, K> repo) {
         this.repository = repo;
     }
-    public D create(D newOne) throws Exception{
-        if(repository.existsById(newOne.getId())){
-            throw new Exception("Entity with " + newOne.getId() + " id exists");
-        }
+    public D create(D newOne){
         return repository.save(newOne);
     }
     public Optional<D> readById(K id){

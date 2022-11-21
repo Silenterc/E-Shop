@@ -1,6 +1,7 @@
 package cz.cvut.fit.zimaluk1.tjv.tjveshop.domain;
 
 import lombok.Data;
+import org.modelmapper.internal.bytebuddy.dynamic.loading.InjectionClassLoader;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,7 +11,7 @@ import java.util.Objects;
 @Data
 public class Customer implements DomainEntity<Long>, Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String email;
