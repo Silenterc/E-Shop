@@ -8,36 +8,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 @RestController
-public class CustomerController {
-    @Autowired
-    private CustomerService customerService;
-    @Autowired
-    private ModelMapper mapper;
-
-    private CustomerDto convertToDto(Customer cus){
-        CustomerDto cusDto = mapper.map(cus, CustomerDto.class);
-        return cusDto;
+@RequestMapping("/customers")
+public class CustomerController extends CRUDController<Customer, CustomerDto, Long>{
+    public CustomerController(CustomerService cus, ModelMapper mapp){
+        super(cus, cusDto -> {
+            return mapp.map(cusDto, Customer.class);},
+                   cuss -> {
+            return mapp.map(cuss, CustomerDto.class);
+                   });
     }
-    private Customer convertToEntity(CustomerDto cusDto){
-        Customer cus = mapper.map(cusDto, Customer.class);
-
-        return cus;
-    }
-
-    @PostMapping
-    @GetMapping("/customers")
-    public CustomerDto create(@RequestBody CustomerDto c){
-        System.err.println("j");
-        Customer newCus = customerService.create(convertToEntity(c));
-        //System.err.println(newCus.toString());
-        //System.err.println(convertToDto(newCus).toString());
-        return convertToDto(newCus);
-    }
+//    private CustomerDto convertToDto(Customer cus){
+//        CustomerDto cusDto = mapper.map(cus, CustomerDto.class);
+//        return cusDto;
+//    }
+//    private Customer convertToEntity(CustomerDto cusDto){
+//        Customer cus = mapper.map(cusDto, Customer.class);
+//
+//        return cus;
+//    }
 }

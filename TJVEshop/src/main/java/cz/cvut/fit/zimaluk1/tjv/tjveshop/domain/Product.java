@@ -27,6 +27,8 @@ public class Product implements DomainEntity<Long>, Serializable {
     public Long getId(){
         return id;
     }
+    @Override
+    public void setId(Long i){ this.id = i;}
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

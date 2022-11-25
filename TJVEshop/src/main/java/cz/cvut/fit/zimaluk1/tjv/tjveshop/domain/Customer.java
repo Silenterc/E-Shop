@@ -32,6 +32,8 @@ public class Customer implements DomainEntity<Long>, Serializable {
     public Long getId(){
         return id;
     }
+    @Override
+    public void setId(Long i){ this.id = i;}
     /*
     Equals and hashcode have been inspired by the code from the presentations.
      */

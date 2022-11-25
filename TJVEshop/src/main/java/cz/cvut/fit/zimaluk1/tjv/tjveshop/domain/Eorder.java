@@ -30,6 +30,8 @@ public class Eorder implements DomainEntity<Long>, Serializable {
         return id;
     }
     @Override
+    public void setId(Long i){ this.id = i;}
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
