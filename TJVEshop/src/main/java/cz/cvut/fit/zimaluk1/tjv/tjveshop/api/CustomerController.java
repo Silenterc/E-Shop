@@ -1,8 +1,10 @@
 package cz.cvut.fit.zimaluk1.tjv.tjveshop.api;
 
 import cz.cvut.fit.zimaluk1.tjv.tjveshop.api.dto.CustomerDto;
+import cz.cvut.fit.zimaluk1.tjv.tjveshop.api.dto.EorderDto;
 import cz.cvut.fit.zimaluk1.tjv.tjveshop.business.CustomerService;
 import cz.cvut.fit.zimaluk1.tjv.tjveshop.domain.Customer;
+import cz.cvut.fit.zimaluk1.tjv.tjveshop.domain.Eorder;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,6 +26,21 @@ public class CustomerController extends CRUDController<Customer, CustomerDto, Lo
                    cuss -> {
             return mapp.map(cuss, CustomerDto.class);
                    });
+    }
+    @GetMapping("/{id}/orders")
+    public Collection<EorderDto> getAllOrders(@PathVariable Long id){
+        Optional<Customer> buyer = ser.readById(id);
+        if(buyer.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "id not found");
+        }
+        Collection<Eorder> col = ((CustomerService)ser).getAllOrders(id);
+        ArrayList<EorderDto> fin = new ArrayList<EorderDto>();
+        for(Eorder e : col){
+            fin.add(new EorderDto(e.getTime(), e.getState(), e.getBuyer().getId()));
+        }
+        return fin;
+
+
     }
 //    private CustomerDto convertToDto(Customer cus){
 //        CustomerDto cusDto = mapper.map(cus, CustomerDto.class);

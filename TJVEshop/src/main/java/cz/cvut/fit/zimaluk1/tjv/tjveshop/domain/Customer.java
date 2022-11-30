@@ -5,6 +5,8 @@ import org.modelmapper.internal.bytebuddy.dynamic.loading.InjectionClassLoader;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
 
 @Entity
@@ -18,6 +20,9 @@ public class Customer implements DomainEntity<Long>, Serializable {
     private String address;
     private Long money;
 
+    @OneToMany(mappedBy = "buyer")
+    private Collection<Eorder> orders = new HashSet<Eorder>();
+
     public Customer(Long id, String name, String email, String address, Long money) {
         this.id = Objects.requireNonNull(id);
         this.name = Objects.requireNonNull(name);
@@ -27,6 +32,10 @@ public class Customer implements DomainEntity<Long>, Serializable {
     }
 
     public Customer(){
+    }
+    public void addOrder(Eorder ord){
+        orders.add(Objects.requireNonNull(ord));
+
     }
     @Override
     public Long getId(){

@@ -5,6 +5,8 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
 
 @Entity
@@ -16,7 +18,11 @@ public class Eorder implements DomainEntity<Long>, Serializable {
     private Timestamp time;
     private String state;
     @ManyToOne
+    @JoinColumn(name = "customer_id")
     private Customer buyer;
+
+    @OneToMany(mappedBy = "eorder")
+    private Collection<Eorder_Product> eorder_products = new HashSet<Eorder_Product>();
 
     public Eorder(Long id, Timestamp time, String state, Customer buyer) {
         this.id = id;

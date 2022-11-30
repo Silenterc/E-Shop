@@ -4,6 +4,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.HashSet;
 
 @Entity
 @Data
@@ -15,6 +17,8 @@ public class Product implements DomainEntity<Long>, Serializable {
     private String price;
     private String amount;
 
+    @OneToMany(mappedBy = "product")
+    private Collection<Eorder_Product> eorder_products = new HashSet<Eorder_Product>();
     public Product(){}
 
     public Product(Long id, String name, String price, String amount) {

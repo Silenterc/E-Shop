@@ -14,7 +14,9 @@ public class Eorder_Product implements DomainEntity<Long>, Serializable {
     @GeneratedValue
     private Long id;
     @ManyToOne
+    @JoinColumn(name = "eorder_id")
     private Eorder eorder;
+    @JoinColumn(name = "product_id")
     @ManyToOne
     private Product product;
     private Long amount;
