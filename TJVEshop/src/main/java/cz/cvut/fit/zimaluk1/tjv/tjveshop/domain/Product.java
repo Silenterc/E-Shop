@@ -14,14 +14,14 @@ public class Product implements DomainEntity<Long>, Serializable {
     @GeneratedValue
     private Long id;
     private String name;
-    private String price;
-    private String amount;
+    private Long price;
+    private Long amount;
 
     @OneToMany(mappedBy = "product")
-    private Collection<Eorder_Product> eorder_products = new HashSet<Eorder_Product>();
+    private Collection<OrderProduct> orderProducts = new HashSet<OrderProduct>();
     public Product(){}
 
-    public Product(Long id, String name, String price, String amount) {
+    public Product(Long id, String name, Long price, Long amount) {
         this.id = id;
         this.name = name;
         this.price = price;

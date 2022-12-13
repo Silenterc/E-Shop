@@ -1,7 +1,6 @@
 package cz.cvut.fit.zimaluk1.tjv.tjveshop.domain;
 
 import lombok.Data;
-import org.modelmapper.internal.bytebuddy.dynamic.loading.InjectionClassLoader;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -21,7 +20,7 @@ public class Customer implements DomainEntity<Long>, Serializable {
     private Long money;
 
     @OneToMany(mappedBy = "buyer")
-    private Collection<Eorder> orders = new HashSet<Eorder>();
+    private Collection<Order> orders = new HashSet<Order>();
 
     public Customer(Long id, String name, String email, String address, Long money) {
         this.id = Objects.requireNonNull(id);
@@ -33,7 +32,7 @@ public class Customer implements DomainEntity<Long>, Serializable {
 
     public Customer(){
     }
-    public void addOrder(Eorder ord){
+    public void addOrder(Order ord){
         orders.add(Objects.requireNonNull(ord));
 
     }

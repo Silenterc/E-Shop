@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.5'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
-    //id 'com.vaadin' version '23.2.7'
+    id 'com.vaadin' version '23.2.7'
 }
 
 group = 'cz.cvut.fit.zimaluk1.tjv'
@@ -22,7 +22,7 @@ repositories {
 }
 
 ext {
-    //set('vaadinVersion', "23.2.7")
+    set('vaadinVersion', "23.2.7")
 }
 
 dependencies {
@@ -30,10 +30,12 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-jersey'
     //implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    //implementation 'com.vaadin:vaadin-spring-boot-starter'
+    implementation 'com.vaadin:vaadin-spring-boot-starter'
     implementation 'org.hibernate:hibernate-core:5.6.10.Final'
     implementation 'org.modelmapper:modelmapper:2.1.1'
     implementation 'com.h2database:h2:2.1.214'
+    implementation 'com.vaadin:vaadin:23.2.10'
+    implementation 'org.springframework.boot:spring-boot-devtools:2.7.5'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.projectlombok:lombok'
@@ -42,7 +44,7 @@ dependencies {
 
 dependencyManagement {
     imports {
-        //mavenBom "com.vaadin:vaadin-bom:${vaadinVersion}"
+        mavenBom "com.vaadin:vaadin-bom:${vaadinVersion}"
     }
 }
 
