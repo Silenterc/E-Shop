@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.context.annotation.Bean;
 @Data
 public class CustomerDto {
+    private Long id;
     private String name;
     private String email;
     private String address;

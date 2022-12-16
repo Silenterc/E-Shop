@@ -12,5 +12,6 @@ public class SignUpView extends VerticalLayout {
         setHorizontalComponentAlignment(Alignment.CENTER, form);
         add(form);
 
+
     }
 }

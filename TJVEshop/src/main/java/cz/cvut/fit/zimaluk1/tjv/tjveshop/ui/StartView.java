@@ -8,7 +8,6 @@ import com.vaadin.flow.router.Route;
 import javax.servlet.annotation.WebServlet;
 
 @Route("")
-@WebServlet(urlPatterns = {"/app/*", "/VAADIN/*"}, asyncSupported = true)
 public class StartView extends VerticalLayout {
 
     public StartView(){
