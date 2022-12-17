@@ -31,8 +31,10 @@ import javax.ws.rs.core.Response;
 public class LoginView extends VerticalLayout {
     PasswordField login = new PasswordField();
     CookieReader cook;
-    public LoginView(CookieReader cooker){
+    NoIdNavigator navigator;
+    public LoginView(CookieReader cooker, NoIdNavigator nav){
         cook = cooker;
+        navigator = nav;
         setWidthFull();
         setHeight("50%");
         init();
@@ -64,21 +66,6 @@ public class LoginView extends VerticalLayout {
         }
     }
     public void showError(){
-        Notification notification = new Notification();
-        notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
-
-        Div text = new Div(new Text("ID not found"));
-
-        Button closeButton = new Button(new Icon("lumo", "cross"));
-        closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
-        closeButton.getElement().setAttribute("aria-label", "Close");
-        closeButton.addClickListener(event -> {
-            notification.close();
-        });
-        HorizontalLayout layout = new HorizontalLayout(text, closeButton);
-        layout.setAlignItems(Alignment.CENTER);
-        notification.add(layout);
-        notification.setPosition(Notification.Position.TOP_CENTER);
-        notification.open();
+        navigator.handle(null, "ID nenalezeno");
     }
 }
