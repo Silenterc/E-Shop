@@ -8,4 +8,15 @@ public class ProductDto {
     private String name;
     private Long price;
     private Long amount;
+
+    public void changeAmount(int a){
+        amount += a;
+    }
+    public ProductDto(){}
+    public ProductDto(ProductDto copied){
+        id = copied.getId();
+        name = copied.getName();
+        price = copied.getPrice();
+        amount = 1L;
+    }
 }
