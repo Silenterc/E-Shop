@@ -9,6 +9,7 @@ public class OrderDto {
     private Timestamp time;
     private String state;
     private Long buyerId;
+    public OrderDto(){}
 
     public OrderDto(Long id, Timestamp time, String state, Long buyerId) {
         this.time = time;

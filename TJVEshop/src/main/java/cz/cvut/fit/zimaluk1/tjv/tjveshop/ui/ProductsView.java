@@ -17,13 +17,17 @@ import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
+import cz.cvut.fit.zimaluk1.tjv.tjveshop.api.dto.OrderDto;
+import cz.cvut.fit.zimaluk1.tjv.tjveshop.api.dto.OrderProductDto;
 import cz.cvut.fit.zimaluk1.tjv.tjveshop.api.dto.ProductDto;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.sql.Timestamp;
 import java.util.*;
 
 @Route(value = "/products", layout = MainLayout.class)
@@ -51,7 +55,6 @@ public class ProductsView extends HorizontalLayout {
     private void initShoppingCart() {
         cartGrid.setSizeFull();
         cartGrid.setColumns("name", "price", "amount");
-        Button delete = new Button("Delete");
         cartGrid.addComponentColumn(prod -> {
             Button del = new Button(new Icon("lumo", "cross"));
             del.getElement().setAttribute("aria-label", "Close");
@@ -97,8 +100,46 @@ public class ProductsView extends HorizontalLayout {
         refreshAll();
     }
 
-
+    /**
+     *  To create an Order containing a certain amount of Items
+     *  I first create an empty Order and then use its ID given to me by the db
+     *  To create multiple order_product entities, one for each item
+     *  I then call put/delete on the items amounts and on the customers money
+     */
     private void orderCart() {
+        //Create an empty order
+        OrderDto newOne = new OrderDto(null, new Timestamp(System.currentTimeMillis()), "entered", Long.valueOf(id));
+        Client client = ClientBuilder.newClient();
+        Response res = client.target("http://localhost:8080/orders").request(MediaType.APPLICATION_JSON)
+                .post(Entity.entity(newOne, MediaType.APPLICATION_JSON));
+        Long orderId = res.readEntity(OrderDto.class).getId();
+        //Create an order_product entity for each item
+        cart.forEach((itemId, item) -> {
+            OrderProductDto orderProd = new OrderProductDto(null, orderId, itemId, item.getAmount());
+            client.target("http://localhost:8080/order_products").request(MediaType.APPLICATION_JSON)
+                    .post(Entity.entity(orderProd, MediaType.APPLICATION_JSON));
+        });
+
+        //Put/delete all the not-available items
+        //If the item is still available, I put
+        //If the item was sold out, I delete
+        cart.forEach((itemId, item) -> {
+            Optional<ProductDto> ordered = fetchedProds.stream().filter(e -> e.getId().equals(itemId)).findFirst();
+            ordered.ifPresentOrElse(or -> {
+                client.target("http://localhost:8080/products/" + itemId).request(MediaType.APPLICATION_JSON)
+                        .put(Entity.entity(or, MediaType.APPLICATION_JSON));},
+                                    () -> {
+                client.target("http://localhost:8080/products/" + itemId).request(MediaType.APPLICATION_JSON)
+                        .delete();});
+        });
+
+        //TODO : DECREASE CUSTOMER MONEY AND VALIDATE IF HE HAS ENOUGH
+
+
+
+
+
+        cancelCart();
     }
 
     private void addToCart() {

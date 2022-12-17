@@ -14,7 +14,7 @@ import java.util.Objects;
 @Table(name = "Eorder")
 public class Order implements DomainEntity<Long>, Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private Timestamp time;
     private String state;
