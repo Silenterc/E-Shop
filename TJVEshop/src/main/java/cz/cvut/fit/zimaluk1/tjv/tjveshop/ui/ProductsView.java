@@ -148,7 +148,7 @@ public class ProductsView extends HorizontalLayout {
         for(var i : cart.values()){
             totalCost += (i.getPrice() * i.getAmount());
         }
-        Response res = client.target("http://localhost:8080/customers/" + id).request(MediaType.APPLICATION_JSON).get(Response.class);
+        Response res = client.target("http://localhost:8080/customers/" + id).request(MediaType.APPLICATION_JSON).get();
         CustomerDto buyer = res.readEntity(CustomerDto.class);
         if(buyer.getMoney() < totalCost){
             navigator.handle(null, "Not Enough Money", false);
