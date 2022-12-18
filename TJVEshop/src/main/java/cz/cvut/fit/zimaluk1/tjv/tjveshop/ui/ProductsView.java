@@ -1,22 +1,14 @@
 package cz.cvut.fit.zimaluk1.tjv.tjveshop.ui;
 
-import com.vaadin.flow.component.Text;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.icon.Icon;
-import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.notification.Notification;
-import com.vaadin.flow.component.notification.NotificationVariant;
-import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
+import cz.cvut.fit.zimaluk1.tjv.tjveshop.api.dto.CustomerDto;
 import cz.cvut.fit.zimaluk1.tjv.tjveshop.api.dto.OrderDto;
 import cz.cvut.fit.zimaluk1.tjv.tjveshop.api.dto.OrderProductDto;
 import cz.cvut.fit.zimaluk1.tjv.tjveshop.api.dto.ProductDto;
@@ -29,6 +21,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.sql.Timestamp;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Route(value = "/products", layout = MainLayout.class)
 public class ProductsView extends HorizontalLayout {
@@ -107,6 +100,9 @@ public class ProductsView extends HorizontalLayout {
      *  I then call put/delete on the items amounts and on the customers money
      */
     private void orderCart() {
+        if(!validateAndDecreaseMoney()){
+            return;
+        }
         //Create an empty order
         OrderDto newOne = new OrderDto(null, new Timestamp(System.currentTimeMillis()), "entered", Long.valueOf(id));
         Client client = ClientBuilder.newClient();
@@ -120,26 +116,51 @@ public class ProductsView extends HorizontalLayout {
                     .post(Entity.entity(orderProd, MediaType.APPLICATION_JSON));
         });
 
-        //Put/delete all the not-available items
-        //If the item is still available, I put
-        //If the item was sold out, I delete
+        //Put/delete all the not-available items = decrease their amount
+        //I cannot actually call DELETE, because I want to have them in the database
         cart.forEach((itemId, item) -> {
             Optional<ProductDto> ordered = fetchedProds.stream().filter(e -> e.getId().equals(itemId)).findFirst();
             ordered.ifPresentOrElse(or -> {
                 client.target("http://localhost:8080/products/" + itemId).request(MediaType.APPLICATION_JSON)
                         .put(Entity.entity(or, MediaType.APPLICATION_JSON));},
                                     () -> {
+                ProductDto unavailable = new ProductDto(item);
+                unavailable.setId(itemId);
+                unavailable.setAmount(0L);
                 client.target("http://localhost:8080/products/" + itemId).request(MediaType.APPLICATION_JSON)
-                        .delete();});
+                        .put(Entity.entity(unavailable, MediaType.APPLICATION_JSON));});
         });
-
-        //TODO : DECREASE CUSTOMER MONEY AND VALIDATE IF HE HAS ENOUGH
-
-
-
-
-
         cancelCart();
+    }
+
+    /**
+     * Reduce the customers money balance by the cost of his cart
+     * If he doesnt have enough, dont proceed with the order
+     *
+     * @return If the user had enough money
+     */
+    private boolean validateAndDecreaseMoney() {
+        if(cart.isEmpty()){
+            navigator.handle(null, "Your Cart Is Empty", false);
+            return false;
+        }
+        Long totalCost = 0L;
+        for(var i : cart.values()){
+            totalCost += (i.getPrice() * i.getAmount());
+        }
+        Client client = ClientBuilder.newClient();
+        Response res = client.target("http://localhost:8080/customers/" + id).request(MediaType.APPLICATION_JSON).get(Response.class);
+        CustomerDto buyer = res.readEntity(CustomerDto.class);
+        if(buyer.getMoney() < totalCost){
+            navigator.handle(null, "Not Enough Money", false);
+            return false;
+
+        } else{
+            buyer.changeMoney(-totalCost);
+            client.target("http://localhost:8080/customers/" + id).request(MediaType.APPLICATION_JSON)
+                    .put(Entity.entity(buyer, MediaType.APPLICATION_JSON));
+            return true;
+        }
     }
 
     private void addToCart() {
@@ -178,10 +199,11 @@ public class ProductsView extends HorizontalLayout {
     }
 
     private void fetchProducts() {
-        navigator.handle(id, "Vaše ID je null");
+        navigator.handle(id, "Vaše ID je null", true);
         Client client = ClientBuilder.newClient();
         Response res = client.target("http://localhost:8080/products").request(MediaType.APPLICATION_JSON)
                 .get(Response.class);
-        fetchedProds = res.readEntity(new GenericType<List<ProductDto>>(){});
+        List<ProductDto> fetched = res.readEntity(new GenericType<List<ProductDto>>(){});
+        fetchedProds = fetched.stream().filter(e -> e.getAmount() > 0).collect(Collectors.toList());
     }
 }

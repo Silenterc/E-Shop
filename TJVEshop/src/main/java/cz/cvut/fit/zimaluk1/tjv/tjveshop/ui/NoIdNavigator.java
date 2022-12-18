@@ -15,7 +15,7 @@ public class NoIdNavigator extends UI {
 
     public NoIdNavigator(){}
 
-    public void handle(String id, String textIn){
+    public void handle(String id, String textIn, boolean navigateHome){
         if(id == null){
             Notification notification = new Notification();
             notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
@@ -27,7 +27,7 @@ public class NoIdNavigator extends UI {
             closeButton.getElement().setAttribute("aria-label", "Close");
             closeButton.addClickListener(event -> {
                 notification.close();
-                getCurrent().navigate("");
+                if(navigateHome) getCurrent().navigate("");
             });
             HorizontalLayout layout = new HorizontalLayout(text, closeButton);
             layout.setAlignItems(FlexComponent.Alignment.CENTER);

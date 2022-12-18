@@ -66,6 +66,6 @@ public class LoginView extends VerticalLayout {
         }
     }
     public void showError(){
-        navigator.handle(null, "ID nenalezeno");
+        navigator.handle(null, "ID nenalezeno", true);
     }
 }

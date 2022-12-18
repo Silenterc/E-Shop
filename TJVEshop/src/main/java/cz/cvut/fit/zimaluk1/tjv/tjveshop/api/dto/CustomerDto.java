@@ -9,5 +9,7 @@ public class CustomerDto {
     private String email;
     private String address;
     private Long money;
-
+    public void changeMoney(Long change){
+        money += change;
+    }
 }
