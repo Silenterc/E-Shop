@@ -5,18 +5,25 @@ import lombok.Data;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
 
 @Entity
 @Data
+@Table(name = "Eorder")
 public class Order implements DomainEntity<Long>, Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private Timestamp time;
     private String state;
     @ManyToOne
+    @JoinColumn(name = "customer_id")
     private Customer buyer;
+
+    @OneToMany(mappedBy = "order")
+    private Collection<OrderProduct> orderProducts = new HashSet<OrderProduct>();
 
     public Order(Long id, Timestamp time, String state, Customer buyer) {
         this.id = id;
@@ -29,6 +36,8 @@ public class Order implements DomainEntity<Long>, Serializable {
     public Long getId(){
         return id;
     }
+    @Override
+    public void setId(Long i){ this.id = i;}
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

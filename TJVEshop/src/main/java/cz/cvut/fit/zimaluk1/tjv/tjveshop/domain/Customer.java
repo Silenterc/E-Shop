@@ -4,18 +4,23 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
 
 @Entity
 @Data
 public class Customer implements DomainEntity<Long>, Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String email;
     private String address;
     private Long money;
+
+    @OneToMany(mappedBy = "buyer")
+    private Collection<Order> orders = new HashSet<Order>();
 
     public Customer(Long id, String name, String email, String address, Long money) {
         this.id = Objects.requireNonNull(id);
@@ -27,10 +32,16 @@ public class Customer implements DomainEntity<Long>, Serializable {
 
     public Customer(){
     }
+    public void addOrder(Order ord){
+        orders.add(Objects.requireNonNull(ord));
+
+    }
     @Override
     public Long getId(){
         return id;
     }
+    @Override
+    public void setId(Long i){ this.id = i;}
     /*
     Equals and hashcode have been inspired by the code from the presentations.
      */

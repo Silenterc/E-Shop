@@ -4,6 +4,8 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.HashSet;
 
 @Entity
 @Data
@@ -12,12 +14,14 @@ public class Product implements DomainEntity<Long>, Serializable {
     @GeneratedValue
     private Long id;
     private String name;
-    private String price;
-    private String amount;
+    private Long price;
+    private Long amount;
 
+    @OneToMany(mappedBy = "product")
+    private Collection<OrderProduct> orderProducts = new HashSet<OrderProduct>();
     public Product(){}
 
-    public Product(Long id, String name, String price, String amount) {
+    public Product(Long id, String name, Long price, Long amount) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -27,6 +31,8 @@ public class Product implements DomainEntity<Long>, Serializable {
     public Long getId(){
         return id;
     }
+    @Override
+    public void setId(Long i){ this.id = i;}
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
