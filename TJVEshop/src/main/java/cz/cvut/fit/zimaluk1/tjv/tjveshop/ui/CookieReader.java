@@ -26,4 +26,16 @@ public class CookieReader {
         }
         return null;
     }
+    public void deleteCookie(String name){
+        Cookie[] cookies = VaadinService.getCurrentRequest().getCookies();
+
+        for (Cookie cookie : cookies) {
+            String cname = cookie.getName();
+            if (name.equals(cname)) {
+                cookie.setMaxAge(0);
+                cookie.setPath("");
+                VaadinService.getCurrentResponse().addCookie(cookie);
+            }
+        }
+    }
 }

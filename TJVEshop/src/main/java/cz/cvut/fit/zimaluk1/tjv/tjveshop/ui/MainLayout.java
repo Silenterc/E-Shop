@@ -16,7 +16,7 @@ public class MainLayout extends AppLayout {
         //TODO NEMÍT JEN PRODUCTS
         RouterLink products = new RouterLink("Produkty", ProductsView.class);
         RouterLink myOrders = new RouterLink("Moje Objednávky", ProductsView.class);
-        RouterLink myAccount = new RouterLink("Můj Účet", ProductsView.class);
+        RouterLink myAccount = new RouterLink("Můj Účet", AccountView.class);
 
         HorizontalLayout header = new HorizontalLayout(logo, products, myOrders, myAccount);
         header.setWidth("100%");

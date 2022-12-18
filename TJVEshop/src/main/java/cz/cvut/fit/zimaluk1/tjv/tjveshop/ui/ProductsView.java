@@ -28,6 +28,7 @@ public class ProductsView extends HorizontalLayout {
     String id;
     CookieReader cook;
     NoIdNavigator navigator;
+    Client client = ClientBuilder.newClient();
 
     Map<Long,ProductDto> cart = new HashMap<>();
     List <ProductDto> fetchedProds = new ArrayList<ProductDto>();
@@ -105,7 +106,6 @@ public class ProductsView extends HorizontalLayout {
         }
         //Create an empty order
         OrderDto newOne = new OrderDto(null, new Timestamp(System.currentTimeMillis()), "entered", Long.valueOf(id));
-        Client client = ClientBuilder.newClient();
         Response res = client.target("http://localhost:8080/orders").request(MediaType.APPLICATION_JSON)
                 .post(Entity.entity(newOne, MediaType.APPLICATION_JSON));
         Long orderId = res.readEntity(OrderDto.class).getId();
@@ -148,7 +148,6 @@ public class ProductsView extends HorizontalLayout {
         for(var i : cart.values()){
             totalCost += (i.getPrice() * i.getAmount());
         }
-        Client client = ClientBuilder.newClient();
         Response res = client.target("http://localhost:8080/customers/" + id).request(MediaType.APPLICATION_JSON).get(Response.class);
         CustomerDto buyer = res.readEntity(CustomerDto.class);
         if(buyer.getMoney() < totalCost){
@@ -200,7 +199,6 @@ public class ProductsView extends HorizontalLayout {
 
     private void fetchProducts() {
         navigator.handle(id, "Vaše ID je null", true);
-        Client client = ClientBuilder.newClient();
         Response res = client.target("http://localhost:8080/products").request(MediaType.APPLICATION_JSON)
                 .get(Response.class);
         List<ProductDto> fetched = res.readEntity(new GenericType<List<ProductDto>>(){});

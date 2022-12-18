@@ -35,6 +35,8 @@ public class SignUpForm extends FormLayout {
     Button close = new Button("Zrušit");
 
     Binder<CustomerDto> binder = new BeanValidationBinder<>(CustomerDto.class);
+
+    Client client = ClientBuilder.newClient();
     public SignUpForm(){
         init();
         add(name, email, address, money, createButtonsLayout());
@@ -69,7 +71,6 @@ public class SignUpForm extends FormLayout {
     private void addCustomer() {
         if(binder.isValid()){
 
-            Client client = ClientBuilder.newClient();
             CustomerDto newOne = binder.getBean();
             Response res = client.target("http://localhost:8080/customers").request(MediaType.APPLICATION_JSON)
                     .post(Entity.entity(newOne, MediaType.APPLICATION_JSON));
