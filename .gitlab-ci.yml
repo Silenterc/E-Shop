@@ -1,14 +1,12 @@
 stages:
-  - compile
-  - test
-
-compile:
-  stage: compile
+  - compiletest
+before_script:  
+  - chmod +x gradlew
+compiletest:
+  stage: compiletest
+  language: java
+  jdk:
+    - openjdk17
   script:
-    cd TJVEshop ; ./gradlew clean; ./gradlew build -x test
+    cd TJVEshop ; ./gradlew build
 
-
-test:
-  stage: test
-  script:
-    cd TJVEshop ; ./gradlew test
