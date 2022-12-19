@@ -12,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Optional;
 @RestController
 @RequestMapping("/customers")
@@ -34,6 +35,7 @@ public class CustomerController extends CRUDController<Customer, CustomerDto, Lo
         for(Order e : col){
             fin.add(new OrderDto(e.getId(), e.getTime(), e.getState(), e.getBuyer().getId()));
         }
+        Collections.reverse(fin);
         return fin;
     }
 

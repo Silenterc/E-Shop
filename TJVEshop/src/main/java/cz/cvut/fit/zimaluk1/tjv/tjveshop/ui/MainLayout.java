@@ -13,9 +13,8 @@ public class MainLayout extends AppLayout {
     }
     public void initHeader(){
         H2 logo = new H2("E-shop");
-        //TODO NEMÍT JEN PRODUCTS
         RouterLink products = new RouterLink("Produkty", ProductsView.class);
-        RouterLink myOrders = new RouterLink("Moje Objednávky", ProductsView.class);
+        RouterLink myOrders = new RouterLink("Moje Objednávky", OrdersView.class);
         RouterLink myAccount = new RouterLink("Můj Účet", AccountView.class);
 
         HorizontalLayout header = new HorizontalLayout(logo, products, myOrders, myAccount);

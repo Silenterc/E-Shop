@@ -13,6 +13,14 @@ public class ProductDto {
         amount += a;
     }
     public ProductDto(){}
+
+    public ProductDto(Long id, String name, Long price, Long amount) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.amount = amount;
+    }
+
     public ProductDto(ProductDto copied){
         id = copied.getId();
         name = copied.getName();
