@@ -27,6 +27,13 @@ public class Product implements DomainEntity<Long>, Serializable {
         this.price = price;
         this.amount = amount;
     }
+    public Product(Product another){
+        id = another.id;
+        name = another.name;
+        price = another.price;
+        amount = another.amount;
+        orderProducts = another.orderProducts;
+    }
     @Override
     public Long getId(){
         return id;

@@ -1,16 +1,24 @@
 package cz.cvut.fit.zimaluk1.tjv.tjveshop.api;
 
+import cz.cvut.fit.zimaluk1.tjv.tjveshop.api.dto.OrderDto;
 import cz.cvut.fit.zimaluk1.tjv.tjveshop.api.dto.OrderProductDto;
+import cz.cvut.fit.zimaluk1.tjv.tjveshop.business.CustomerService;
 import cz.cvut.fit.zimaluk1.tjv.tjveshop.business.OrderProductService;
+import cz.cvut.fit.zimaluk1.tjv.tjveshop.domain.Customer;
 import cz.cvut.fit.zimaluk1.tjv.tjveshop.domain.Order;
 import cz.cvut.fit.zimaluk1.tjv.tjveshop.domain.OrderProduct;
 import cz.cvut.fit.zimaluk1.tjv.tjveshop.domain.Product;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Optional;
 
 @RestController
@@ -31,6 +39,5 @@ public class OrderProductController extends CRUDController<OrderProduct, OrderPr
                     return new OrderProductDto(OrderProduct.getId(), OrderProduct.getOrder().getId(), OrderProduct.getProduct().getId(), OrderProduct.getAmount());
                 }
                 );
-
     }
 }
