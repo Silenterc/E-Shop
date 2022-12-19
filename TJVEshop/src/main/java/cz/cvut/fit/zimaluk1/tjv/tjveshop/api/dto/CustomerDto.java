@@ -12,4 +12,19 @@ public class CustomerDto {
     public void changeMoney(Long change){
         money += change;
     }
+
+    public void edit(CustomerDto edited) {
+        if(edited.name != null && !edited.name.isEmpty()){
+            name = edited.name;
+        }
+        if(edited.email != null && !edited.email.isEmpty()){
+            email = edited.email;
+        }
+        if(edited.address != null && !edited.address.isEmpty()){
+            address = edited.address;
+        }
+        if(edited.money != null){
+            money = edited.money;
+        }
+    }
 }

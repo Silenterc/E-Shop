@@ -7,7 +7,7 @@ import com.vaadin.flow.router.Route;
 
 import javax.servlet.annotation.WebServlet;
 
-@Route("")
+@Route(value = "", layout = StartLayout.class)
 public class StartView extends VerticalLayout {
 
     public StartView(){

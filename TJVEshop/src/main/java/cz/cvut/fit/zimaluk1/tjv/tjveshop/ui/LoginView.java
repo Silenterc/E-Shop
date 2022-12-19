@@ -3,6 +3,7 @@ package cz.cvut.fit.zimaluk1.tjv.tjveshop.ui;
 import com.vaadin.flow.component.HasValue;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.Text;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Div;
@@ -27,7 +28,7 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-@Route("/login")
+@Route(value = "/login", layout = StartLayout.class)
 public class LoginView extends VerticalLayout {
     PasswordField login = new PasswordField();
     CookieReader cook;
@@ -58,8 +59,9 @@ public class LoginView extends VerticalLayout {
                 .get(Response.class);
         if(res.getStatus() == 200){
             cook.createCookie("id", value);
-
-            getUI().ifPresent(ui -> ui.navigate("/products"));
+            //Need to send a new HTTP request so the cookies work as intended
+            //This line of code has cost me hours of debugging
+            UI.getCurrent().getPage().setLocation("/ui/products");
 
         } else{
             showError();
