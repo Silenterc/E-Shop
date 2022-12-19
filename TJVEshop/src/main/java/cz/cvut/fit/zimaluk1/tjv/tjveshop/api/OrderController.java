@@ -7,6 +7,8 @@ import cz.cvut.fit.zimaluk1.tjv.tjveshop.business.OrderService;
 import cz.cvut.fit.zimaluk1.tjv.tjveshop.domain.Customer;
 import cz.cvut.fit.zimaluk1.tjv.tjveshop.domain.Order;
 import cz.cvut.fit.zimaluk1.tjv.tjveshop.domain.Product;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,6 +42,7 @@ public class OrderController extends CRUDController<Order, OrderDto, Long>{
             });
     }
     @GetMapping("/{id}/products")
+    @Operation(summary = "Gets all the Products belonging to an Order using its ID")
     public Collection<ProductDto> getAllProducts(@PathVariable Long id){
         Optional<Order> order = ser.readById(id);
         if(order.isEmpty()){
