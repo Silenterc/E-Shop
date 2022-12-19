@@ -5,10 +5,10 @@ stages:
 compile:
   stage: compile
   script:
-    ./gradlew clean; ./gradlew build -x test
+    cd TJVEshop ; ./gradlew clean; ./gradlew build -x test
 
 
 test:
   stage: test
   script:
-    ./gradlew test
+    cd TJVEshop ; ./gradlew test
