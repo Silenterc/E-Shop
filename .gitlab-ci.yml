@@ -1,12 +1,10 @@
+image: eclipse-temurin:17
 stages:
   - compiletest
 before_script:  
   - chmod +x gradlew
 compiletest:
   stage: compiletest
-  language: java
-  jdk:
-    - openjdk17
   script:
     cd TJVEshop ; ./gradlew build
 
