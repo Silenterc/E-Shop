@@ -1,0 +1,14 @@
+stages:
+  - compile
+  - test
+
+compile:
+  stage: compile
+  script:
+    ./gradlew clean; ./gradlew build -x test
+
+
+test:
+  stage: test
+  script:
+    ./gradlew test
