@@ -9,6 +9,18 @@ public class CustomerDto {
     private String email;
     private String address;
     private Long money;
+
+    public CustomerDto() {
+    }
+
+    public CustomerDto(Long id, String name, String email, String address, Long money) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.address = address;
+        this.money = money;
+    }
+
     public void changeMoney(Long change){
         money += change;
     }

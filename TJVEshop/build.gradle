@@ -37,6 +37,7 @@ dependencies {
     implementation 'com.vaadin:vaadin:23.2.10'
     implementation 'org.springframework.boot:spring-boot-devtools:2.7.5'
     implementation 'org.springdoc:springdoc-openapi-ui:1.6.13'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.0'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
     annotationProcessor 'org.projectlombok:lombok'
