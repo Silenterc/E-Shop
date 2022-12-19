@@ -35,16 +35,21 @@ public class CustomerController extends CRUDController<Customer, CustomerDto, Lo
             fin.add(new OrderDto(e.getId(), e.getTime(), e.getState(), e.getBuyer().getId()));
         }
         return fin;
-
-
     }
-//    private CustomerDto convertToDto(Customer cus){
-//        CustomerDto cusDto = mapper.map(cus, CustomerDto.class);
-//        return cusDto;
-//    }
-//    private Customer convertToEntity(CustomerDto cusDto){
-//        Customer cus = mapper.map(cusDto, Customer.class);
-//
-//        return cus;
-//    }
+
+    /**
+     * Gets the newest n orders from a Customer
+     * @param id Customer id, whose orders I want to return
+     * @param n The amount of orders I want to return(sorted by newest)
+     * @return N newest orders
+     */
+    @GetMapping("/{id}/orders/{n}")
+    public Collection<OrderDto> getNOrders(@PathVariable("id") Long id, @PathVariable("n") Long n){
+        Collection<Order> sorted = ((CustomerService)ser).getNOrders(id, n);
+        Collection<OrderDto> fin = new ArrayList<>();
+        for(Order e : sorted){
+            fin.add(new OrderDto(e.getId(), e.getTime(), e.getState(), e.getBuyer().getId()));
+        }
+        return fin;
+    }
 }

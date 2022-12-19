@@ -1,5 +1,6 @@
 package cz.cvut.fit.zimaluk1.tjv.tjveshop.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -12,7 +13,7 @@ import java.util.Objects;
 @Entity
 @Data
 @Table(name = "Eorder")
-public class Order implements DomainEntity<Long>, Serializable {
+public class Order implements DomainEntity<Long>, Serializable, Comparable<Order> {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
@@ -32,6 +33,11 @@ public class Order implements DomainEntity<Long>, Serializable {
         this.buyer = Objects.requireNonNull(buyer);
     }
     public Order(){}
+
+    public int compareTo(Order another) {
+        return time.compareTo(another.time);
+
+    }
     @Override
     public Long getId(){
         return id;
