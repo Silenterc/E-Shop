@@ -13,9 +13,9 @@ public class MainLayout extends AppLayout {
     }
     public void initHeader(){
         H2 logo = new H2("E-shop");
-        RouterLink products = new RouterLink("Produkty", ProductsView.class);
-        RouterLink myOrders = new RouterLink("Moje Objednávky", OrdersView.class);
-        RouterLink myAccount = new RouterLink("Můj Účet", AccountView.class);
+        RouterLink products = new RouterLink("Products", ProductsView.class);
+        RouterLink myOrders = new RouterLink("My Orders", OrdersView.class);
+        RouterLink myAccount = new RouterLink("My Account", AccountView.class);
 
         HorizontalLayout header = new HorizontalLayout(logo, products, myOrders, myAccount);
         header.setWidth("100%");

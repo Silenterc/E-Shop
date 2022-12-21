@@ -27,12 +27,12 @@ import javax.ws.rs.core.Response;
 import static org.h2.fulltext.FullText.closeAll;
 
 public class SignUpForm extends FormLayout {
-    TextField name = new TextField("Jméno");
+    TextField name = new TextField("Name");
     EmailField email = new EmailField("E-Mail");
-    TextField address = new TextField("Adresa");
-    TextField money = new TextField("Peníze");
-    Button save = new Button("Registrovat");
-    Button close = new Button("Zrušit");
+    TextField address = new TextField("Address");
+    TextField money = new TextField("Money");
+    Button save = new Button("Sign Up");
+    Button close = new Button("Cancel");
 
     Binder<CustomerDto> binder = new BeanValidationBinder<>(CustomerDto.class);
 

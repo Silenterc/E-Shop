@@ -198,7 +198,7 @@ public class ProductsView extends HorizontalLayout {
     }
 
     private void fetchProducts() {
-        navigator.handle(id, "Vaše ID je null", true);
+        navigator.handle(id, "Your ID is null", true);
         Response res = client.target("http://localhost:8080/products").request(MediaType.APPLICATION_JSON)
                 .get(Response.class);
         List<ProductDto> fetched = res.readEntity(new GenericType<List<ProductDto>>(){});

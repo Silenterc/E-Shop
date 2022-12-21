@@ -42,7 +42,7 @@ public class LoginView extends VerticalLayout {
 
     }
     public void init(){
-        login.setLabel("Vaše ID");
+        login.setLabel("Your ID");
         login.setPrefixComponent(VaadinIcon.USER.create());
         login.setAllowedCharPattern("[0-9]");
         login.setErrorMessage("Not a valid ID");
@@ -68,6 +68,6 @@ public class LoginView extends VerticalLayout {
         }
     }
     public void showError(){
-        navigator.handle(null, "ID nenalezeno", true);
+        navigator.handle(null, "ID not found", true);
     }
 }
