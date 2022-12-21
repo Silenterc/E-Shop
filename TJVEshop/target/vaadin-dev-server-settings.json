@@ -1,0 +1,14 @@
+{
+  "frontendFolder": "/Users/silenter/Desktop/TJV/eshop/TJVEshop/./frontend",
+  "themeFolder": "themes",
+  "themeResourceFolder": "/Users/silenter/Desktop/TJV/eshop/TJVEshop/target/flow-frontend",
+  "staticOutput": "/Users/silenter/Desktop/TJV/eshop/TJVEshop/target/classes/META-INF/VAADIN/webapp/VAADIN/static",
+  "generatedFolder": "generated",
+  "frontendBundleOutput": "/Users/silenter/Desktop/TJV/eshop/TJVEshop/target/classes/META-INF/VAADIN/webapp",
+  "addonFrontendFolder": "target/flow-frontend/",
+  "themeName": "",
+  "clientServiceWorkerSource": "/Users/silenter/Desktop/TJV/eshop/TJVEshop/target/sw.ts",
+  "pwaEnabled": false,
+  "offlineEnabled": false,
+  "offlinePath": "'offline.html'"
+}

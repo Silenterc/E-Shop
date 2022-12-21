@@ -5,6 +5,7 @@ import cz.cvut.fit.zimaluk1.tjv.tjveshop.api.dto.OrderDto;
 import cz.cvut.fit.zimaluk1.tjv.tjveshop.business.CustomerService;
 import cz.cvut.fit.zimaluk1.tjv.tjveshop.domain.Customer;
 import cz.cvut.fit.zimaluk1.tjv.tjveshop.domain.Order;
+import io.swagger.v3.oas.annotations.Operation;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,7 @@ public class CustomerController extends CRUDController<Customer, CustomerDto, Lo
                    });
     }
     @GetMapping("/{id}/orders")
+    @Operation(summary = "Gets all the Orders belonging to a Customer using his ID")
     public Collection<OrderDto> getAllOrders(@PathVariable Long id){
         Optional<Customer> buyer = ser.readById(id);
         if(buyer.isEmpty()){
@@ -46,6 +48,7 @@ public class CustomerController extends CRUDController<Customer, CustomerDto, Lo
      * @return N newest orders
      */
     @GetMapping("/{id}/orders/{n}")
+    @Operation(summary = "Gets up to n newest orders from a Customer using his ID")
     public Collection<OrderDto> getNOrders(@PathVariable("id") Long id, @PathVariable("n") Long n){
         Collection<Order> sorted = ((CustomerService)ser).getNOrders(id, n);
         Collection<OrderDto> fin = new ArrayList<>();
