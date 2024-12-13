@@ -1,11 +1,11 @@
-# Eshop
-Budu vyvíjet takový velice základní e-shop. Zákazník si bude muset založit účet, na který si může přidat peníze. Z tohoto účtu pak může tvořit objednávky produktů, které jsou v e-shopu dostupné. Těchto objednávek může tvořit kolik chce a platí, že objednávka může mít více produktů a produkt může být u více objednávek(pokud to jeho množství povolí). Front-End bych rad napsal ve Vaadinu.
+# Simple E-Shop Project  
 
-## Business operace v klientovi
-Když zákazník bude chtít provézt objednávku = klikne na "Koupit", ale nebude mít dostatečný počet peněz na kontě, objednávka se neprovede a dostane upozorňení.
+This project is a straightforward e-shop application where customers can add funds to their account and use them to purchase various products.  
 
-## Komplexnější dotaz v serveru
-V profilu zákazníka uvidí např. 3 jeho nejnovější objednávky.
-    -Nejsem si jistý co za lepší dotaz vymyslet.
+## Key features
+- **Back-end:** Developed in Java using the Spring Framework. The application follows a three-layer architecture.
+- **Database:** Data is stored in a PostgreSQL database running in a Docker container.
+- **Testing:** Includes unit and integration tests.
+- **Front-end:** Built in Java using the Vaadin Framework.  
 
 <img src="diagram.png">
