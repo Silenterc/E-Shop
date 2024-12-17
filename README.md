@@ -3,7 +3,7 @@
 This project is a straightforward e-shop application where customers can add funds to their account and use them to purchase various products.  
 
 ## Key features
-- **Back-end:** Developed in Java using the Spring Framework. The application follows a three-layer architecture.
+- **Back-end:** Developed in Java using the Spring Framework . The application follows a three-layer architecture and exposes a RESTful API for interacting with the system.
 - **Database:** Data is stored in a PostgreSQL database running in a Docker container.
 - **Testing:** Includes unit and integration tests.
 - **Front-end:** Built in Java using the Vaadin Framework.  
